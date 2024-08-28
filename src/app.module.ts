@@ -15,6 +15,13 @@ import { UserModule } from './user/user.module';
         path: join(process.cwd(), 'src/graphql.ts'),
         outputAs: 'class',
       },
+      formatError: (error) => {
+        const graphQLFormattedError = {
+          message: error.message,
+          errors: error?.extensions?.originalError,
+        };
+        return graphQLFormattedError;
+      },
     }),
     MongooseModule.forRoot('mongodb://localhost:27017/nestgraphql'),
     UserModule,
