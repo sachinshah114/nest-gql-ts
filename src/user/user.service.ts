@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User, UserDocument } from './user.schema';
 import { CreateUserInputDTO } from './dto/create-user.dto';
+import { EncryptPassword } from 'src/common/encrypt';
 
 @Injectable()
 export class UserService {
@@ -17,6 +18,9 @@ export class UserService {
     if (isEmailExist && Object.keys(isEmailExist).length > 0) {
       throw new BadRequestException('User email already exists');
     }
+
+    //Now Encrypt user's password...
+    createUserInput.password = await EncryptPassword(createUserInput.password);
     const createdUser = new this.userModel(createUserInput);
     return createdUser.save();
   }
