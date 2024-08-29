@@ -12,6 +12,14 @@ export class CreateUserInput {
     name: string;
     email: string;
     password: string;
+    phone?: Nullable<string>;
+}
+
+export class AddressInput {
+    address1: string;
+    address2?: Nullable<string>;
+    city: string;
+    postcode: string;
 }
 
 export class User {
@@ -19,6 +27,19 @@ export class User {
     name: string;
     email: string;
     password: string;
+    isAdmin: boolean;
+    isVerified: boolean;
+    verificationCode?: Nullable<string>;
+    address?: Nullable<Address>;
+    phone?: Nullable<string>;
+    isBlocked: boolean;
+}
+
+export class Address {
+    address1: string;
+    address2?: Nullable<string>;
+    city: string;
+    postcode: string;
 }
 
 export abstract class IQuery {

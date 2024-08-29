@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 import { User, UserDocument } from './user.schema';
 import { CreateUserInputDTO } from './dto/create-user.dto';
 import { EncryptPassword } from 'src/common/encrypt';
+import { GenerateRandomAlphaNumericCode } from 'src/common/common';
 
 @Injectable()
 export class UserService {
@@ -21,6 +22,9 @@ export class UserService {
 
     //Now Encrypt user's password...
     createUserInput.password = await EncryptPassword(createUserInput.password);
+
+    //Generate a verification code which we need to send by Email to verify user...
+    createUserInput.verificationCode = GenerateRandomAlphaNumericCode(8);
     const createdUser = new this.userModel(createUserInput);
     return createdUser.save();
   }

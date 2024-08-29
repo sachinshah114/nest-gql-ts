@@ -3,12 +3,33 @@ type User {
   name: String!
   email: String!
   password: String!
+  isAdmin: Boolean!
+  isVerified: Boolean!
+  verificationCode: String
+  address: Address
+  phone: String
+  isBlocked: Boolean!
 }
 
 input CreateUserInput {
   name: String!
   email: String!
-  password: String!
+  password: String!  
+  phone: String  
+}
+
+input AddressInput {
+  address1: String!
+  address2: String
+  city: String!
+  postcode: String!
+}
+
+type Address {
+  address1: String!
+  address2: String
+  city: String!
+  postcode: String!
 }
 
 type Query {

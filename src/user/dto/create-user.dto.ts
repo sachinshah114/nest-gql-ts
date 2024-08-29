@@ -1,5 +1,12 @@
 import { InputType, Field } from '@nestjs/graphql';
-import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
+import {
+  IsEmail,
+  IsNotEmpty,
+  IsString,
+  MinLength,
+  IsOptional,
+  IsPhoneNumber,
+} from 'class-validator';
 
 @InputType()
 export class CreateUserInputDTO {
@@ -17,4 +24,12 @@ export class CreateUserInputDTO {
   @MinLength(6, { message: 'Password must be at least 6 characters long' })
   @IsNotEmpty({ message: 'Password is required' })
   password: string;
+
+  @Field({ nullable: true })
+  @IsPhoneNumber('GB', { message: 'Invalid phone number' })
+  @IsOptional()
+  phone?: string;
+
+  @IsOptional()
+  verificationCode?: string;
 }
