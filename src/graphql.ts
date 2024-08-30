@@ -8,6 +8,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
+export class LoginInput {
+    email: string;
+    password: string;
+}
+
 export class CreateUserInput {
     name: string;
     email: string;
@@ -35,11 +40,8 @@ export class User {
     isBlocked: boolean;
 }
 
-export class Address {
-    address1: string;
-    address2?: Nullable<string>;
-    city: string;
-    postcode: string;
+export class LoginResponse {
+    access_token: string;
 }
 
 export abstract class IQuery {
@@ -47,7 +49,16 @@ export abstract class IQuery {
 }
 
 export abstract class IMutation {
+    abstract login(input: LoginInput): LoginResponse | Promise<LoginResponse>;
+
     abstract createUser(input: CreateUserInput): User | Promise<User>;
+}
+
+export class Address {
+    address1: string;
+    address2?: Nullable<string>;
+    city: string;
+    postcode: string;
 }
 
 type Nullable<T> = T | null;

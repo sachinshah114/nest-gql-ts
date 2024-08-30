@@ -6,6 +6,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { MongooseModule } from '@nestjs/mongoose';
 import { join } from 'path';
 import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
@@ -24,6 +25,7 @@ import { UserModule } from './user/user.module';
       },
     }),
     MongooseModule.forRoot('mongodb://localhost:27017/nestgraphql'),
+    AuthModule,
     UserModule,
   ],
   controllers: [AppController],

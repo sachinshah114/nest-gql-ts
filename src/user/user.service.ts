@@ -32,4 +32,12 @@ export class UserService {
   async findAll(): Promise<User[]> {
     return this.userModel.find().exec();
   }
+
+  async findOne(key: object): Promise<User> {
+    return this.userModel.findOne(key) as unknown as User;
+  }
+
+  async login(): Promise<User> {
+    return {} as User;
+  }
 }
